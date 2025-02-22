@@ -18,6 +18,13 @@ FetchContent_Declare(fastlz
 
 FetchContent_MakeAvailable(fastlz)
 
+FetchContent_Declare(SFML
+    GIT_REPOSITORY https://github.com/SFML/SFML.git
+    GIT_TAG 2.6.2
+)
+
+FetchContent_MakeAvailable(SFML)
+
 add_library(fastlz
     ${fastlz_SOURCE_DIR}/fastlz.c
     ${fastlz_SOURCE_DIR}/fastlz.h
@@ -51,8 +58,6 @@ target_link_libraries(noita-decompress PUBLIC noita-settings-common)
 
 add_executable(noita-compress compress_main.cpp)
 target_link_libraries(noita-compress PUBLIC noita-settings-common)
-
-find_package(SFML REQUIRED system window graphics)
 
 add_executable(noita-png-petri png_petri_main.cpp)
 target_link_libraries(noita-png-petri
