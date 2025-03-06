@@ -64,9 +64,10 @@ std::string decompress_data(const std::string& compressed)
 
 std::string compress_data(const std::string& data)
 {
-    uint64_t len = 8 + data.size() * 2;
+    uint64_t len = data.size() * 2;
     if (len < 66)
         len = 66; // the buffer must be at least 5% larger and at least 66 bytes
+    len += 8;
     std::string result(len, '\0');
     auto new_size = fastlz_compress_level(2, data.data(), data.size(), result.data() + 8);
     if (new_size <= 0) {
